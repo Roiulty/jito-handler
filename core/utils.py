@@ -46,7 +46,7 @@ class JitoClient(Client):
 
     def create_tip_transaction(self, sender_object, sender, amount: int, environment) -> str:
 
-        try:
+        '''try:
             tip_accounts = self.get_tip_accounts()
 
         except KeyError as e:
@@ -55,7 +55,9 @@ class JitoClient(Client):
             elif environment == "PROD":
                 tip_accounts = settings.MAIN_BACKUP_TIP_ACCOUNTS
             else:
-                raise Exception("Environment not set, please set 'DEV' or 'PROD' under 'ENVIRONMENT' in config")
+                raise Exception("Environment not set, please set 'DEV' or 'PROD' under 'ENVIRONMENT' in config")'''
+
+        tip_accounts = settings.TEST_BACKUP_TIP_ACCOUNTS
 
         tip_account = random.choice(tip_accounts)
         receiver = Pubkey.from_string(tip_account)
@@ -145,6 +147,7 @@ class JitoClient(Client):
         )
 
         response = response.json()
+        print(f'Get Status Results: {response}')
         result = response["result"]
         value = result["value"]
 
@@ -182,6 +185,7 @@ class JitoClient(Client):
             json=payload
         )
         bundle = response.json()
+        print(f'Bundle Response: {bundle}')
         result = bundle["result"]
         return result
 
@@ -222,7 +226,7 @@ sender = Keypair.from_seed_phrase_and_passphrase(
     passphrase=os.getenv('PASS_PHRASE')
 )
 
-sx_addr = Pubkey.from_string(os.getenv('MAIN_WALLET'))
+sx_addr = Pubkey.from_string(os.getenv('MAIN_WALLET_2'))
 rx = Pubkey.from_string(os.getenv('TEST_WALLET'))
 
 tx = client.create_transaction(
