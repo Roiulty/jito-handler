@@ -217,13 +217,26 @@ client = JitoClient(settings.SOL_TESTNET)
 #print(client.get_bundle_statuses(bundle_id=bundle, network=settings.JITO_TESTNET))
 
 
-sender = Keypair.from_base58_string(os.getenv('SEED_PHRASE'))
+sender = Keypair.from_seed_phrase_and_passphrase(
+    seed_phrase=os.getenv('SEED_PHRASE'),
+    passphrase=os.getenv('PASS_PHRASE')
+)
 
 sx_addr = Pubkey.from_string(os.getenv('MAIN_WALLET'))
 rx = Pubkey.from_string(os.getenv('TEST_WALLET'))
 
-tx = client.create_transaction(sender_object=sender, sender=sx_addr, recipient=rx, amount=10000000)
-tip = client.create_tip_transaction(sender_object=sender, sender=sx_addr, amount=2000, environment=settings.ENVIRONMENT)
+tx = client.create_transaction(
+    sender_object=sender,
+    sender=sx_addr,
+    recipient=rx,
+    amount=10000000
+)
+tip = client.create_tip_transaction(
+    sender_object=sender,
+    sender=sx_addr,
+    amount=2000,
+    environment=settings.ENVIRONMENT
+)
 
 txns = [tx, tip]
 
