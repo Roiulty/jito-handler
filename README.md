@@ -4,14 +4,14 @@ Helper Project for Controlling Solana Transactions Using the Jito Network
 
 # Setup
 
-Install Requirements (Windows/Powershell)
-```commandline
-PS:> pip install -r requirements.txt
-```
-
 Enter the Project Directory
 ```commandline
 PS:> cd jito-handler
+```
+
+Install Requirements (Windows/Powershell)
+```commandline
+PS:> pip install -r requirements.txt
 ```
 
 Create .env file
