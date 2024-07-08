@@ -118,9 +118,7 @@ class JitoClient(Client):
             json=payload
         )
         accounts = tip_accounts.json()
-        print(f'Accounts: {accounts}')
         result = accounts["result"]
-        print(f'Result: {result}')
         return result
 
     @staticmethod
@@ -145,13 +143,10 @@ class JitoClient(Client):
             headers=headers,
             json=payload
         )
-        print(f'Response: {response}')
+
         response = response.json()
-        print(f'Status: {response}')
         result = response["result"]
-        print(f'Result: {result}')
         value = result["value"]
-        print(f'Value: {value}')
 
         if not value:
             print("No bundles found in the response.")
@@ -187,7 +182,6 @@ class JitoClient(Client):
             json=payload
         )
         bundle = response.json()
-        print(f'Bundle: {bundle}')
         result = bundle["result"]
         return result
 
